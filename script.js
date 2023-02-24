@@ -12,6 +12,8 @@ const closeModal = document.querySelector('.close-modal');
 
 // definitions of additional functions
 const initGame = () => {
+  scores[0] = 0;
+  scores[1] = 0;
   document.querySelector('#score--0').textContent = '0';
   document.querySelector('#score--1').textContent = '0';
   document.querySelector('#current--0').textContent = '0';
@@ -38,9 +40,18 @@ const changeActivePlayerClass = () => {
     .classList.add('player--active');
 };
 
+const startNewGame = () => {
+  for (let i = 0; i < scores.length; i++) {
+    scores[i] = 0;
+  }
+  activePlayer = 0;
+  currentScore = 0;
+  initGame();
+};
+
 // starting conditions
-initGame();
 const scores = [0, 0];
+initGame();
 let activePlayer = 0;
 let currentScore = 0;
 const pointsToWin = 2;
@@ -70,17 +81,10 @@ holdBtn.addEventListener('click', () => {
   changeActivePlayerClass();
 });
 
-newGameBtn.addEventListener('click', () => {
-  for (let i = 0; i < scores.length; i++) {
-    scores[i] = 0;
-  }
-  activePlayer = 0;
-  currentScore = 0;
-  initGame();
-});
+newGameBtn.addEventListener('click', startNewGame);
 
 closeModal.addEventListener('click', () => {
   overlayElement.classList.add('hidden');
   modalElement.classList.add('hidden');
-  initGame();
+  startNewGame();
 });

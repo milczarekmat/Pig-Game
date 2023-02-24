@@ -1,5 +1,11 @@
 'use strict';
 
+const scores = [0, 0];
+let activePlayer = 0;
+let currentScore = 0;
+let gameEnded = false;
+const pointsToWin = 2;
+
 // selecting elements
 const newGameBtn = document.querySelector('.btn--new');
 const rollBtn = document.querySelector('.btn--roll');
@@ -14,6 +20,7 @@ const closeModalBtn = document.querySelector('.close-modal');
 const initGame = () => {
   scores[0] = 0;
   scores[1] = 0;
+  gameEnded = false;
   document.querySelector('#score--0').textContent = '0';
   document.querySelector('#score--1').textContent = '0';
   document.querySelector('#current--0').textContent = '0';
@@ -55,12 +62,7 @@ const closeModal = () => {
   startNewGame();
 };
 
-// starting conditions
-const scores = [0, 0];
 initGame();
-let activePlayer = 0;
-let currentScore = 0;
-const pointsToWin = 2;
 
 // button listeners
 rollBtn.addEventListener('click', () => {
@@ -81,6 +83,7 @@ holdBtn.addEventListener('click', () => {
   document.querySelector(`#score--${activePlayer}`).textContent =
     scores[activePlayer];
   if (scores[activePlayer] >= pointsToWin) {
+    gameEnded = true;
     showWinner(activePlayer);
     return;
   }
@@ -96,3 +99,14 @@ document.addEventListener('keydown', e => {
     closeModal();
   }
 });
+
+document.addEventListener(
+  'click',
+  e => {
+    if (!gameEnded) return;
+    if (!e.target.closest('.modal')) {
+      closeModal();
+    }
+  },
+  true
+);

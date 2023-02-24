@@ -8,7 +8,7 @@ const diceImgElement = document.querySelector('.dice');
 const overlayElement = document.querySelector('.overlay');
 const modalElement = document.querySelector('.modal');
 const modalAnnouncementElement = document.querySelector('.winner-announcement');
-const closeModal = document.querySelector('.close-modal');
+const closeModalBtn = document.querySelector('.close-modal');
 
 // definitions of additional functions
 const initGame = () => {
@@ -49,6 +49,12 @@ const startNewGame = () => {
   initGame();
 };
 
+const closeModal = () => {
+  overlayElement.classList.add('hidden');
+  modalElement.classList.add('hidden');
+  startNewGame();
+};
+
 // starting conditions
 const scores = [0, 0];
 initGame();
@@ -83,8 +89,10 @@ holdBtn.addEventListener('click', () => {
 
 newGameBtn.addEventListener('click', startNewGame);
 
-closeModal.addEventListener('click', () => {
-  overlayElement.classList.add('hidden');
-  modalElement.classList.add('hidden');
-  startNewGame();
+closeModalBtn.addEventListener('click', closeModal);
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeModal();
+  }
 });

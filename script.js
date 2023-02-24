@@ -108,5 +108,5 @@ document.addEventListener(
       closeModal();
     }
   },
-  true
+  true //turn on capturing
 );

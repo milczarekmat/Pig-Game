@@ -2,7 +2,7 @@
 
 let activePlayer, currentScore;
 const scores = [0, 0],
-  pointsToWin = 2; //TODO change testing value
+  pointsToWin = 100;
 
 // selecting elements
 const newGameBtn = document.querySelector('.btn--new');

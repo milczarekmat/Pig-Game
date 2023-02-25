@@ -209,7 +209,7 @@ main {
   display: none;
 }
 
-.close-modal {
+.modal__close-btn {
   position: absolute;
   right: 8px;
   top: 8px;
@@ -221,9 +221,10 @@ main {
   cursor: pointer;
   opacity: 0.8;
   transition: opacity 0.3s;
+  font-size: 21px;
 }
 
-.close-modal:hover {
+.modal__close-btn:hover {
   opacity: 1;
 }
 

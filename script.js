@@ -12,7 +12,7 @@ const diceImgElement = document.querySelector('.dice');
 const overlayElement = document.querySelector('.overlay');
 const modalElement = document.querySelector('.modal');
 const modalAnnouncementElement = document.querySelector('.winner-announcement');
-const closeModalBtn = document.querySelector('.close-modal');
+const closeModalBtn = document.querySelector('.modal__close-btn');
 
 // definitions of additional functions
 const initGame = () => {

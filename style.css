@@ -213,14 +213,14 @@ main {
   position: absolute;
   right: 8px;
   top: 8px;
-  width: 5%;
+  width: 35px;
   aspect-ratio: 1/1;
   border: none;
   background-color: white;
   border-radius: 3px;
   cursor: pointer;
   opacity: 0.8;
-  transition: opacity 0.3;
+  transition: opacity 0.3s;
 }
 
 .close-modal:hover {

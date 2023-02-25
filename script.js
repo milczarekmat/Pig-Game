@@ -1,10 +1,8 @@
 'use strict';
 
-const scores = [0, 0];
-let activePlayer = 0;
-let currentScore = 0;
-let gameEnded = false;
-const pointsToWin = 2;
+let activePlayer, currentScore;
+const scores = [0, 0],
+  pointsToWin = 2; //TODO change testing value
 
 // selecting elements
 const newGameBtn = document.querySelector('.btn--new');
@@ -18,9 +16,11 @@ const closeModalBtn = document.querySelector('.close-modal');
 
 // definitions of additional functions
 const initGame = () => {
-  scores[0] = 0;
-  scores[1] = 0;
-  gameEnded = false;
+  for (let i = 0; i < scores.length; i++) {
+    scores[i] = 0;
+  }
+  activePlayer = 0;
+  currentScore = 0;
   document.querySelector('#score--0').textContent = '0';
   document.querySelector('#score--1').textContent = '0';
   document.querySelector('#current--0').textContent = '0';
@@ -47,19 +47,10 @@ const changeActivePlayerClass = () => {
     .classList.add('player--active');
 };
 
-const startNewGame = () => {
-  for (let i = 0; i < scores.length; i++) {
-    scores[i] = 0;
-  }
-  activePlayer = 0;
-  currentScore = 0;
-  initGame();
-};
-
 const closeModal = () => {
   overlayElement.classList.add('hidden');
   modalElement.classList.add('hidden');
-  startNewGame();
+  initGame();
 };
 
 initGame();
@@ -83,16 +74,11 @@ holdBtn.addEventListener('click', () => {
   document.querySelector(`#score--${activePlayer}`).textContent =
     scores[activePlayer];
   if (scores[activePlayer] >= pointsToWin) {
-    gameEnded = true;
     showWinner(activePlayer);
     return;
   }
   changeActivePlayerClass();
 });
-
-newGameBtn.addEventListener('click', startNewGame);
-
-closeModalBtn.addEventListener('click', closeModal);
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
@@ -103,10 +89,16 @@ document.addEventListener('keydown', e => {
 document.addEventListener(
   'click',
   e => {
-    if (!gameEnded) return;
+    if (modalElement.classList.contains('hidden')) {
+      return;
+    }
     if (!e.target.closest('.modal')) {
       closeModal();
     }
   },
   true //turn on capturing
 );
+
+newGameBtn.addEventListener('click', initGame);
+
+closeModalBtn.addEventListener('click', closeModal);
